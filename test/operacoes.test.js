@@ -73,4 +73,156 @@ describe('Suíte de Testes Fraca para 50 Operações Aritméticas', () => {
   test('48. deve calcular o dobro de um número', () => { expect(dobro(10)).toBe(20); });
   test('49. deve calcular o triplo de um número', () => { expect(triplo(10)).toBe(30); });
   test('50. deve calcular a metade de um número', () => { expect(metade(20)).toBe(10); });
+
+  // === Testes Adicionais para Matar Mutantes (51-84) ===
+
+  // Testes de edge cases e validações de erro com mensagens específicas
+  test('51. deve lançar erro específico para raiz quadrada de número negativo', () => {
+    expect(() => raizQuadrada(-1)).toThrow('Não é possível calcular a raiz quadrada de um número negativo.');
+  });
+
+  test('52. deve lançar erro específico para fatorial de número negativo', () => {
+    expect(() => fatorial(-1)).toThrow('Fatorial não é definido para números negativos.');
+  });
+
+  test('53. deve lançar erro específico para divisão por zero', () => {
+    expect(() => divisao(10, 0)).toThrow('Divisão por zero não é permitida.');
+  });
+
+  test('54. deve lançar erro específico para array vazio em maximoArray', () => {
+    expect(() => maximoArray([])).toThrow('Array vazio не possui valor máximo.');
+  });
+
+  test('55. deve lançar erro específico para array vazio em minimoArray', () => {
+    expect(() => minimoArray([])).toThrow('Array vazio не possui valor mínimo.');
+  });
+
+  test('56. deve lançar erro específico para array vazio em medianaArray', () => {
+    expect(() => medianaArray([])).toThrow('Array vazio не possui mediana.');
+  });
+
+  test('57. deve lançar erro específico para inverso de zero', () => {
+    expect(() => inverso(0)).toThrow('Não é possível inverter o número zero.');
+  });
+
+  // Testes para fatorial com casos especiais
+  test('58. deve retornar 1 para fatorial de 0', () => {
+    expect(fatorial(0)).toBe(1);
+  });
+
+  test('59. deve retornar 1 para fatorial de 1', () => {
+    expect(fatorial(1)).toBe(1);
+  });
+
+  // Testes para mediaArray com array vazio
+  test('60. deve retornar 0 para média de array vazio', () => {
+    expect(mediaArray([])).toBe(0);
+  });
+
+  // Testes para isPar e isImpar com casos negativos
+  test('61. deve retornar false para isPar com número ímpar', () => {
+    expect(isPar(7)).toBe(false);
+  });
+
+  test('62. deve retornar false para isImpar com número par', () => {
+    expect(isImpar(8)).toBe(false);
+  });
+
+  // Testes para isPrimo com casos críticos
+  test('63. deve retornar false para isPrimo de 1', () => {
+    expect(isPrimo(1)).toBe(false);
+  });
+
+  test('64. deve retornar false para isPrimo de 0', () => {
+    expect(isPrimo(0)).toBe(false);
+  });
+
+  test('65. deve retornar false para isPrimo de número negativo', () => {
+    expect(isPrimo(-5)).toBe(false);
+  });
+
+  test('66. deve retornar false para isPrimo de número composto', () => {
+    expect(isPrimo(4)).toBe(false);
+    expect(isPrimo(6)).toBe(false);
+    expect(isPrimo(9)).toBe(false);
+  });
+
+  test('67. deve retornar true para isPrimo de 2', () => {
+    expect(isPrimo(2)).toBe(true);
+  });
+
+  // Testes para clamp com casos de fronteira
+  test('68. deve retornar min quando valor é menor que min', () => {
+    expect(clamp(-5, 0, 10)).toBe(0);
+  });
+
+  test('69. deve retornar max quando valor é maior que max', () => {
+    expect(clamp(15, 0, 10)).toBe(10);
+  });
+
+  test('70. deve retornar min quando valor é igual a min', () => {
+    expect(clamp(0, 0, 10)).toBe(0);
+  });
+
+  test('71. deve retornar max quando valor é igual a max', () => {
+    expect(clamp(10, 0, 10)).toBe(10);
+  });
+
+  // Testes para isDivisivel com caso falso
+  test('72. deve retornar false quando número não é divisível', () => {
+    expect(isDivisivel(10, 3)).toBe(false);
+  });
+
+  // Testes para conversão de temperatura com diferentes valores
+  test('73. deve converter 100°C para Fahrenheit corretamente', () => {
+    expect(celsiusParaFahrenheit(100)).toBe(212);
+  });
+
+  test('74. deve converter 212°F para Celsius corretamente', () => {
+    expect(fahrenheitParaCelsius(212)).toBe(100);
+  });
+
+  // Testes para funções de comparação com casos falsos e iguais
+  test('75. deve retornar false quando a não é maior que b', () => {
+    expect(isMaiorQue(5, 10)).toBe(false);
+  });
+
+  test('76. deve retornar false quando a é igual a b em isMaiorQue', () => {
+    expect(isMaiorQue(5, 5)).toBe(false);
+  });
+
+  test('77. deve retornar false quando a não é menor que b', () => {
+    expect(isMenorQue(10, 5)).toBe(false);
+  });
+
+  test('78. deve retornar false quando a é igual a b em isMenorQue', () => {
+    expect(isMenorQue(5, 5)).toBe(false);
+  });
+
+  test('79. deve retornar false quando números não são iguais', () => {
+    expect(isEqual(7, 8)).toBe(false);
+  });
+
+  // Testes para medianaArray com array par e desordenado
+  test('80. deve calcular a mediana de um array par', () => {
+    expect(medianaArray([1, 2, 3, 4])).toBe(2.5);
+  });
+
+  test('81. deve calcular a mediana de um array desordenado', () => {
+    expect(medianaArray([5, 1, 3, 2, 4])).toBe(3);
+  });
+
+  test('82. deve calcular a mediana de um array par desordenado', () => {
+    expect(medianaArray([4, 1, 3, 2])).toBe(2.5);
+  });
+
+  // Teste para produtoArray com array vazio
+  test('83. deve retornar 1 para produto de array vazio', () => {
+    expect(produtoArray([])).toBe(1);
+  });
+
+  // Testes adicionais para somaArray
+  test('84. deve retornar a soma correta de números negativos', () => {
+    expect(somaArray([-1, -2, -3])).toBe(-6);
+  });
 });
